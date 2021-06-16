@@ -12,6 +12,16 @@ provider "azurerm" {
   features {}
 }
 
+terraform {
+  backend "azurerm" {
+    # variables are not allowed so file has to be transformed during CI/CD
+    resource_group_name  = "RG-ANISRG-EU-ANISSHARED-001"
+    storage_account_name = "staanisrgeuterraform001"
+    container_name       = "terraform"
+    key                  = "anisshared-dev-eu-main.terraform.tfstate"
+  }
+}
+
 resource "azurerm_resource_group" "rg" {
   name     = local.shared-rg
   location = var.region_name
