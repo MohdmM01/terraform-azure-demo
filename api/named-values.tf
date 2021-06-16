@@ -8,7 +8,7 @@ resource "azurerm_api_management_named_value" "basic-auth-password" {
 }
 
 resource "azurerm_api_management_named_value" "test-named-value" {
-  name                = "basic-auth-password"
+  name                = "test-named-value"
   resource_group_name = local.shared-rg 
   api_management_name = local.apim_name
   display_name        = "test-named-value"
