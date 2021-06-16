@@ -1,0 +1,29 @@
+<policies>
+    <inbound>
+        <base />
+        <set-variable name="isAuthOk" value="@(context.Request.Headers.ContainsKey("Authorization") && context.Request.Headers["Authorization"].Contains("Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes("${Basic-Auth-UserName}:{{basic-auth-password}}"))))" />
+        <choose>
+            <when condition="@(context.Variables.GetValueOrDefault<bool>("isAuthOk"))">
+                <set-backend-service id="apim-generated-policy" backend-id="${Backend-Id}" />
+            </when>
+            <otherwise>
+                <return-response>
+                    <set-status code="401" reason="Unauthorized" />
+                    <set-header name="WWW-Authenticate" exists-action="override">
+                        <value>Basic realm="Test"</value>
+                    </set-header>
+                    <set-body>Authentication Failed</set-body>
+                </return-response>
+            </otherwise>
+        </choose>
+    </inbound>
+    <backend>
+        <base />
+    </backend>
+    <outbound>
+        <base />
+    </outbound>
+    <on-error>
+        <base />
+    </on-error>
+</policies>
