@@ -39,7 +39,7 @@ jobs:
       run: terraform apply --auto-approve
 
   apim:
-    name: 'Add APIs,Policies to APIM'
+    name: 'Add APIs,Policies to APIM - Apply'
     runs-on: ubuntu-latest
     needs: main
     defaults:
@@ -50,6 +50,17 @@ jobs:
     - uses: cschleiden/replace-tokens@v1
       with:
         files: '["**/*.tf*"]'
+      env:  #Below environment variables will be used in terraform scripts. So changing them will update the azure resource.
+        Environment-Name: dev
+        Environment-Name-Suffix: dev
+        Environment-Name-Suffix-Short: dev
+        Project-Name: anisshared
+        Region-Short: eu
+        Region: 'West Europe'
+        Resource-Suffix: "001"
+        Terraform-RG-SUFFIX: 'ANISRG'
+        Basic-Auth-UserName: "test-user"
+        Basic-Auth-Password: ${{ secrets.TF_FORMOX_DEV_BASICAUTH_PASSWORD }}        
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
