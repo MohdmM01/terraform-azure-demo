@@ -1,0 +1,39 @@
+# This is a basic workflow to help you get started with Actions
+name: Terraform Azure Apply Demo
+
+on:
+  workflow_dispatch:
+   
+env:
+  ARM_CLIENT_ID: f35329b8-42ea-4ee9-bfb1-5caa244a284f       
+  ARM_CLIENT_SECRET: ${{secrets.TF_ARM_DEV_CLIENT_SECRET}}  
+  ARM_SUBSCRIPTION_ID: 19e3a2a7-85c5-4f83-bf96-6c39488d079f
+  ARM_TENANT_ID: cc7f83dd-bc5a-4682-9b3e-062a900202a2
+  Terraform-RG-SUFFIX: ANISRG
+  Terraform-RG: ANISRG
+
+jobs:
+  main:
+    name: 'Provision Main Infra - Apply'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: cschleiden/replace-tokens@v1
+      with:
+        files: '["**/*.tf*"]'
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: 0.14.10
+        terraform_wrapper: false
+
+    - name: Terraform Init
+      run: terraform init
+
+    - name: Terraform Apply
+      run: terraform apply --auto-approve

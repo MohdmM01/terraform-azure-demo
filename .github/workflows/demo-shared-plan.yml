@@ -5,12 +5,12 @@ on:
   workflow_dispatch:
    
 env:
-  ARM_CLIENT_ID: f35329b8-42ea-4ee9-bfb1-5caa244a284f       #It's specific to DEV. So need to replace it with appropriate value for each environment.
-  ARM_CLIENT_SECRET: ${{secrets.TF_ARM_DEV_CLIENT_SECRET}}  #It's specific to DEV. So need to replace it with appropriate value for each environment.
+  ARM_CLIENT_ID: f35329b8-42ea-4ee9-bfb1-5caa244a284f       
+  ARM_CLIENT_SECRET: ${{secrets.TF_ARM_DEV_CLIENT_SECRET}}  
   ARM_SUBSCRIPTION_ID: 19e3a2a7-85c5-4f83-bf96-6c39488d079f
   ARM_TENANT_ID: cc7f83dd-bc5a-4682-9b3e-062a900202a2
-  Terraform-RG-SUFFIX: DEV
-  Terraform-RG: LEVOSHARED
+  Terraform-RG-SUFFIX: ANISRG
+  Terraform-RG: ANISRG
 
 jobs:
   main:
@@ -87,8 +87,3 @@ jobs:
 
     - name: Terraform Plan
       run: terraform plan -out=tfplan.bin --var-file=variables.tfvars -input=false -lock=false 
- 
-
-
-
-
