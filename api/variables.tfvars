@@ -17,3 +17,5 @@ gateway_publisher_name = "#{Gateway-Publisher-Name}#"
 gateway_publisher_email = "#{Gateway-Publisher-Email}#"
 
 terraform_rg_suffix = "#{Terraform-RG-SUFFIX}#"
+
+basic_auth_password = "#{Basic-Auth-Password}#"
