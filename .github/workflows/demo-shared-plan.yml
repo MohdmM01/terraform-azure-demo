@@ -52,6 +52,9 @@ jobs:
     - name: Terraform Plan
       run: terraform plan -out=tfplan.bin --var-file=variables.tfvars -input=false
 
+    - name: Terraform Apply
+      run: terraform apply --auto-approve 'tfplan.bin'      
+
   apim:
     name: 'Add APIs,Policies to APIM'
     runs-on: ubuntu-latest
@@ -74,7 +77,7 @@ jobs:
         Resource-Suffix: "001"
         Terraform-RG-SUFFIX: 'ANISRG'
         Basic-Auth-UserName: "test-user"
-        Basic-Auth-Password: ${{ secrets.TF_FORMOX_DEV_BASICAUTH_PASSWORD }}
+        Basic-Auth-Password: ${{ secrets.TF_BASICAUTH_PASSWORD }}
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
@@ -87,3 +90,6 @@ jobs:
 
     - name: Terraform Plan
       run: terraform plan -out=tfplan.bin --var-file=variables.tfvars -input=false -lock=false 
+
+    - name: Terraform Apply
+      run: terraform apply --auto-approve 'tfplan.bin'        

@@ -60,7 +60,7 @@ jobs:
         Resource-Suffix: "001"
         Terraform-RG-SUFFIX: 'ANISRG'
         Basic-Auth-UserName: "test-user"
-        Basic-Auth-Password: ${{ secrets.TF_FORMOX_DEV_BASICAUTH_PASSWORD }}        
+        Basic-Auth-Password: ${{ secrets.TF_BASICAUTH_PASSWORD }}        
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
