@@ -25,6 +25,28 @@ paths:
           description: User Not Found
       operationId: get-users-userId
       description: Retrieve the information of the user with the matching user ID.
+  '/getName':
+    parameters:
+      - schema:
+          type: string
+        name: emailId
+        in: query
+        required: true
+        description: Email of an existing user.
+    get:
+      summary: Get User Info by User Email
+      tags: []
+      responses:
+        '200':
+          description: User Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: User Not Found
+      operationId: get-users-email
+      description: Retrieve the information of the user with the matching user email.
 components:
   schemas:
     User:
