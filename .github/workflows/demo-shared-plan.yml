@@ -38,6 +38,7 @@ jobs:
         Gateway-SKU-Name : 'Developer_1'
         Gateway-Publisher-Name: 'Mohd Anis'
         Gateway-Publisher-Email: 'mohdanis.mohdmokhtar@mattheyasia.com'
+        Terraform-RG-SUFFIX: 'ANISRG'
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
@@ -67,10 +68,11 @@ jobs:
         Environment-Name: dev
         Environment-Name-Suffix: dev
         Environment-Name-Suffix-Short: dev
-        Project-Name: levoshared
+        Project-Name: anisshared
         Region-Short: eu
         Region: 'West Europe'
         Resource-Suffix: "001"
+        Terraform-RG-SUFFIX: 'ANISRG'
         Basic-Auth-UserName: "test-user"
         Basic-Auth-Password: ${{ secrets.TF_FORMOX_DEV_BASICAUTH_PASSWORD }}
 
